@@ -4,14 +4,13 @@ Serves the static site and provides API endpoints
 """
 
 import os
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_file
 from flask_cors import CORS
 import logging
 
 app = Flask(__name__, 
     static_folder='static',
-    static_url_path='/static',
-    template_folder='templates'
+    static_url_path='/static'
 )
 
 # Enable CORS for API requests
@@ -26,7 +25,10 @@ logger = logging.getLogger(__name__)
 @app.route('/')
 def index():
     """Serve the main HTML page"""
-    return render_template('index.html')
+    try:
+        return send_file('index.html', mimetype='text/html')
+    except:
+        return "index.html not found", 404
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -162,8 +164,11 @@ def get_pricing():
 
 @app.errorhandler(404)
 def not_found(error):
-    """Handle 404 errors"""
-    return jsonify({'error': 'Resource not found'}), 404
+    """Handle 404 errors - serve index.html for SPA"""
+    try:
+        return send_file('index.html', mimetype='text/html')
+    except:
+        return jsonify({'error': 'Not found'}), 404
 
 @app.errorhandler(500)
 def internal_error(error):
