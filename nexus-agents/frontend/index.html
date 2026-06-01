@@ -122,6 +122,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -137,6 +143,7 @@
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -479,49 +486,6 @@
             font-weight: 600;
         }
 
-        /* Getting Started Section */
-        .getting-started {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
-        }
-
-        .getting-started .container {
-            max-width: 800px;
-        }
-
-        .code-block {
-            background: rgba(10, 14, 39, 0.9);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--secondary);
-            margin: 2rem 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .code-block code {
-            color: var(--secondary);
-        }
-
-        .code-label {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .step {
-            margin-bottom: 2rem;
-        }
-
-        .step h4 {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
         /* Pricing Section */
         .pricing {
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
@@ -615,6 +579,107 @@
             width: 100%;
         }
 
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);
+        }
+
+        .contact .container {
+            max-width: 600px;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(0, 212, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 102, 204, 0.4);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            display: block;
+        }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
@@ -634,6 +699,22 @@
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
             font-size: 1.1rem;
+        }
+
+        .cta-btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
@@ -665,6 +746,7 @@
             text-decoration: none;
             margin-bottom: 0.5rem;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         .footer-section a:hover {
@@ -695,12 +777,66 @@
             border-radius: 50%;
             color: var(--secondary);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .social-links a:hover {
             background: var(--secondary);
             color: var(--dark-bg);
             transform: translateY(-3px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--dark-bg-2);
+            margin: 5% auto;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
         }
 
         /* Responsive Design */
@@ -803,14 +939,13 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">⚡ Nexus Agent</div>
+            <div class="logo" onclick="document.querySelector('.hero').scrollIntoView({behavior: 'smooth'})">⚡ Nexus Agent</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#tech">Tech</a></li>
-                <li><a href="#getting-started">Get Started</a></li>
+                <li><a href="#tech">Tech Stack</a></li>
                 <li><a href="#pricing">Pricing</a></li>
-                <li><a href="https://github.com/marootee/nexus-agent" target="_blank">GitHub</a></li>
-                <li><button class="cta-btn" onclick="document.getElementById('cta-form').scrollIntoView({behavior: 'smooth'})">Contact</button></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="cta-btn" onclick="document.getElementById('contactModal').style.display='block'">Get Started</button></li>
             </ul>
         </div>
     </nav>
@@ -821,8 +956,8 @@
             <h1>Autonomous Intelligence, Simplified</h1>
             <p>Build powerful AI-driven agents that work autonomously, learn from experience, and integrate seamlessly into your business workflows</p>
             <div class="hero-buttons">
-                <a href="#getting-started" class="btn btn-primary">Start Building</a>
-                <a href="https://github.com/marootee/nexus-agent" class="btn btn-secondary">View on GitHub</a>
+                <button class="btn btn-primary" onclick="document.getElementById('contactModal').style.display='block'">Start Building</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('demoModal').style.display='block'">Watch Demo</button>
             </div>
         </div>
     </section>
@@ -878,7 +1013,7 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">100%</span>
-                        <span class="stat-label">Open Source</span>
+                        <span class="stat-label">Production Ready</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">24/7</span>
@@ -900,12 +1035,12 @@
                     <p>Python 3.9+</p>
                 </div>
                 <div class="tech-item">
-                    <div class="tech-emoji">🌐</div>
-                    <p>Modern Web Stack</p>
-                </div>
-                <div class="tech-item">
                     <div class="tech-emoji">⚡</div>
                     <p>FastAPI</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-emoji">🌐</div>
+                    <p>Flask Backend</p>
                 </div>
                 <div class="tech-item">
                     <div class="tech-emoji">🔧</div>
@@ -917,54 +1052,8 @@
                 </div>
                 <div class="tech-item">
                     <div class="tech-emoji">🎯</div>
-                    <p>Production Ready</p>
+                    <p>Cloud Deploy</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Getting Started Section -->
-    <section id="getting-started" class="getting-started">
-        <div class="container">
-            <h2 class="section-title">Get Started in Minutes</h2>
-            <p class="section-subtitle">Simple installation and quick setup</p>
-
-            <div class="step">
-                <h4>1. Installation</h4>
-                <div class="code-block">
-                    <span class="code-label">$ pip install nexus-agent</span>
-                    <code>pip install nexus-agent</code>
-                </div>
-            </div>
-
-            <div class="step">
-                <h4>2. Create Your First Agent</h4>
-                <div class="code-block">
-                    <span class="code-label">agent.py</span>
-                    <code>from nexus_agent import Agent, Tool<br><br>
-# Create an agent<br>
-agent = Agent(name="MyAgent", model="gpt-4")<br><br>
-# Add tools<br>
-@agent.tool<br>
-def calculate(expression: str) -> float:<br>
-&nbsp;&nbsp;return eval(expression)<br><br>
-# Run the agent<br>
-result = agent.run("Calculate 2 + 2 * 3")<br>
-print(result)</code>
-                </div>
-            </div>
-
-            <div class="step">
-                <h4>3. Deploy</h4>
-                <div class="code-block">
-                    <span class="code-label">Docker deployment</span>
-                    <code>docker run -e AGENT_KEY=your_key nexus-agent:latest</code>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Ready to build? Check out the full documentation on GitHub</p>
-                <a href="https://github.com/marootee/nexus-agent" class="btn btn-primary">View Full Documentation</a>
             </div>
         </div>
     </section>
@@ -986,7 +1075,7 @@ print(result)</code>
                         <li>1GB storage</li>
                         <li>Open source</li>
                     </ul>
-                    <button class="btn btn-secondary pricing-btn">Get Started</button>
+                    <button class="btn btn-secondary pricing-btn" onclick="handlePricingSelect('starter')">Get Started</button>
                 </div>
 
                 <div class="pricing-card featured">
@@ -1002,111 +1091,225 @@ print(result)</code>
                         <li>Custom integrations</li>
                         <li>API access</li>
                     </ul>
-                    <button class="btn btn-primary pricing-btn">Start Free Trial</button>
+                    <button class="btn btn-primary pricing-btn" onclick="handlePricingSelect('professional')">Subscribe Now</button>
                 </div>
 
                 <div class="pricing-card">
                     <div class="pricing-title">Enterprise</div>
                     <div class="pricing-price">Custom</div>
-                    <div class="pricing-period">contact us</div>
+                    <div class="pricing-period">contact sales</div>
                     <ul class="pricing-features">
-                        <li>Everything in Pro</li>
-                        <li>Dedicated support</li>
+                        <li>Unlimited everything</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Custom solutions</li>
                         <li>Unlimited storage</li>
-                        <li>SLA guarantees</li>
-                        <li>On-premise deployment</li>
-                        <li>Custom training</li>
+                        <li>White-label options</li>
+                        <li>SLA guaranteed</li>
                     </ul>
-                    <button class="btn btn-secondary pricing-btn">Contact Sales</button>
+                    <button class="btn btn-secondary pricing-btn" onclick="handlePricingSelect('enterprise')">Contact Sales</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="cta-form" class="cta-section">
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
         <div class="container">
-            <h2>Ready to Build the Future?</h2>
-            <p>Join thousands of developers building with Nexus Agent</p>
-            <button class="btn btn-primary" onclick="alert('Contact form would be integrated here')">Get Started Free</button>
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Ready to transform your business? Let's talk</p>
+            <div class="contact-form">
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" placeholder="Your company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                    <div class="form-message"></div>
+                </form>
+            </div>
         </div>
     </section>
+
+    <!-- CTA Section -->
+    <div class="container">
+        <div class="cta-section">
+            <h2>Ready to Build Smarter Agents?</h2>
+            <p>Join hundreds of companies using Nexus Agent to automate their operations</p>
+            <button class="cta-btn-white" onclick="document.getElementById('contactModal').style.display='block'">Start Your Journey</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Product</h4>
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#getting-started">Documentation</a>
-                <a href="https://github.com/marootee/nexus-agent" target="_blank">GitHub</a>
+                <a href="#features" onclick="document.querySelector('#features').scrollIntoView({behavior: 'smooth'})">Features</a>
+                <a href="#pricing" onclick="document.querySelector('#pricing').scrollIntoView({behavior: 'smooth'})">Pricing</a>
+                <a href="#tech" onclick="document.querySelector('#tech').scrollIntoView({behavior: 'smooth'})">Technology</a>
             </div>
             <div class="footer-section">
                 <h4>Company</h4>
-                <a href="https://github.com/marootee" target="_blank">About Us</a>
-                <a href="https://github.com/marootee/nexus-agent/issues" target="_blank">Support</a>
-                <a href="https://github.com/marootee/nexus-agent/blob/main/LICENSE" target="_blank">License</a>
-                <a href="#">Privacy Policy</a>
+                <a href="#contact" onclick="document.querySelector('#contact').scrollIntoView({behavior: 'smooth'})">Contact</a>
+                <a href="javascript:void(0)">About Us</a>
+                <a href="javascript:void(0)">Blog</a>
             </div>
             <div class="footer-section">
                 <h4>Connect</h4>
                 <div class="social-links">
-                    <a href="https://github.com/marootee" target="_blank" title="GitHub">★</a>
-                    <a href="https://twitter.com" target="_blank" title="Twitter">𝕏</a>
-                    <a href="https://linkedin.com" target="_blank" title="LinkedIn">in</a>
-                    <a href="mailto:contact@nexusagent.dev" title="Email">✉</a>
+                    <a href="javascript:void(0)" title="Twitter">𝕏</a>
+                    <a href="javascript:void(0)" title="LinkedIn">in</a>
+                    <a href="javascript:void(0)" title="Discord">dc</a>
                 </div>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <a href="#">Blog</a>
-                <a href="#">Community</a>
-                <a href="#">Status</a>
-                <a href="#">API Docs</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Nexus Agent. All rights reserved. | Built with ⚡ by <a href="https://github.com/marootee" target="_blank" style="color: var(--secondary);">marootee</a></p>
+            <p>&copy; 2025 Nexus Agent. All rights reserved. Built for the future.</p>
         </div>
     </footer>
 
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="document.getElementById('contactModal').style.display='none'">&times;</span>
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;">Let's Get Started</h2>
+            <form onsubmit="handleModalContactSubmit(event)">
+                <div class="form-group">
+                    <label for="modal-name">Name</label>
+                    <input type="text" id="modal-name" required placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="modal-email">Email</label>
+                    <input type="email" id="modal-email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="modal-message">Message</label>
+                    <textarea id="modal-message" required placeholder="Tell us what you need..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Get Started</button>
+                <div class="form-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="document.getElementById('demoModal').style.display='none'">&times;</span>
+            <h2 style="color: var(--secondary); margin-bottom: 1.5rem;">Watch Demo</h2>
+            <div style="aspect-ratio: 16/9; background: rgba(0, 212, 255, 0.05); border-radius: 12px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                <p style="color: var(--text-secondary); text-align: center;">
+                    <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🎬</span>
+                    Demo video coming soon. Check back regularly!
+                </p>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const contactModal = document.getElementById('contactModal');
+            const demoModal = document.getElementById('demoModal');
+            if (event.target == contactModal) {
+                contactModal.style.display = 'none';
+            }
+            if (event.target == demoModal) {
+                demoModal.style.display = 'none';
+            }
+        }
+
+        // Handle pricing selection
+        function handlePricingSelect(plan) {
+            const modal = document.getElementById('contactModal');
+            const message = document.createElement('p');
+            message.style.cssText = 'color: var(--secondary); text-align: center; margin-bottom: 1rem;';
+            message.textContent = `You selected: ${plan.toUpperCase()} plan`;
+            
+            const form = modal.querySelector('form');
+            const existingMessage = form.querySelector('p[style*="color: var(--secondary)"]');
+            if (existingMessage) existingMessage.remove();
+            form.insertBefore(message, form.firstChild);
+            
+            modal.style.display = 'block';
+        }
+
+        // Handle contact form submission
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value
+            };
+
+            // Simulate API call
+            const submitBtn = form.querySelector('.form-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            setTimeout(() => {
+                const messageDiv = form.querySelector('.form-message');
+                messageDiv.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+                messageDiv.className = 'form-message success';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                
+                setTimeout(() => {
+                    messageDiv.className = 'form-message';
+                }, 5000);
+            }, 1000);
+        }
+
+        // Handle modal contact form submission
+        function handleModalContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = document.getElementById('modal-name').value;
+            const email = document.getElementById('modal-email').value;
+
+            const submitBtn = form.querySelector('.form-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+
+            setTimeout(() => {
+                const messageDiv = form.querySelector('.form-message');
+                messageDiv.textContent = '✓ Successfully submitted! Check your email for next steps.';
+                messageDiv.className = 'form-message success';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Started';
+                
+                setTimeout(() => {
+                    document.getElementById('contactModal').style.display = 'none';
+                    messageDiv.className = 'form-message';
+                }, 2000);
+            }, 1000);
+        }
+
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href !== '#' && document.querySelector(href)) {
                     e.preventDefault();
-                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector(href).scrollIntoView({behavior: 'smooth'});
                 }
-            });
-        });
-
-        // Add active state to nav links on scroll
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Simple analytics tracking
-        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-            btn.addEventListener('click', function() {
-                console.log('CTA clicked:', this.textContent);
             });
         });
     </script>
