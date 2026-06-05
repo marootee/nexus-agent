@@ -130,7 +130,7 @@ def run_nexus_agent(user_message: str) -> str:
         api_key=GROQ_API_KEY,
     )
 
-      system_prompt = (
+    system_prompt = (
         "You are Nexus Agent, an advanced AI workspace assistant.\n"
         "- You can reason deeply, write and refactor code, and plan multi-step solutions.\n"
         "- When the user asks to create, save, or generate files (code, docs, notes, reports), "
