@@ -23,7 +23,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("OPENAI_API_KEY") or "YOUR
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=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,
+    api_key=os.getenv("GROQ_API_KEY") or "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",
 )
 
 MODEL_NAME = "llama-3.1-8b-instant"
