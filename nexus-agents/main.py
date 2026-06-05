@@ -19,14 +19,13 @@ WORKSPACE_DIR = BASE_DIR / "workspace"
 WORKSPACE_DIR.mkdir(exist_ok=True)
 
 # Use Groq via OpenAI-compatible client
-GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("OPENAI_API_KEY") or "YOUR_GROQ_KEY_HERE"
+# Use Groq via OpenAI-compatible client
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("OPENAI_API_KEY")
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.getenv("GROQ_API_KEY") or "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",
+    api_key=GROQ_API_KEY,
 )
-
-MODEL_NAME = "llama-3.1-8b-instant"
 
 # -------------------- FastAPI app --------------------
 
