@@ -18,14 +18,9 @@ FRONTEND_PATH = BASE_DIR / "frontend"
 WORKSPACE_DIR = BASE_DIR / "workspace"
 WORKSPACE_DIR.mkdir(exist_ok=True)
 
-# Use Groq via OpenAI-compatible client
-# Use Groq via OpenAI-compatible client
+# Read Groq key from environment (Render dashboard)
 GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("OPENAI_API_KEY")
-
-client = OpenAI(
-    base_url="https://api.groq.com/openai/v1",
-    api_key=GROQ_API_KEY,
-)
+MODEL_NAME = "llama-3.1-8b-instant"
 
 # -------------------- FastAPI app --------------------
 
@@ -38,7 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# serve static frontend if needed later
+# mount /static if you later add CSS/JS there
 if FRONTEND_PATH.exists():
     app.mount("/static", StaticFiles(directory=str(FRONTEND_PATH)), name="static")
 
@@ -113,18 +108,27 @@ NEXUS_TOOLS: List[Dict[str, Any]] = [
 ]
 
 
+# -------------------- Core agent logic --------------------
+
 def run_nexus_agent(user_message: str) -> str:
     """
     Send the user message to Groq with tool support,
     execute any tool calls (file creation), and return final reply.
     """
 
-    if GROQ_API_KEY in (None, "", "YOUR_GROQ_KEY_HERE"):
-        # Fallback demo mode
+    # 1. Demo mode if key missing
+    if not GROQ_API_KEY:
         return (
-            "Nexus Agent is running in DEMO MODE because GROQ_API_KEY is not set.\n\n"
+            "Nexus Agent is running in DEMO MODE because GROQ_API_KEY is not set "
+            "in the environment.\n\n"
             "Your message was:\n" + user_message
         )
+
+    # 2. Create client lazily (no crash at import time)
+    client = OpenAI(
+        base_url="https://api.groq.com/openai/v1",
+        api_key=GROQ_API_KEY,
+    )
 
     system_prompt = (
         "You are Nexus Agent, an advanced AI workspace assistant.\n"
@@ -137,34 +141,44 @@ def run_nexus_agent(user_message: str) -> str:
         "- Be concise but precise in your explanations."
     )
 
-    messages = [
+    messages: List[Dict[str, Any]] = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_message},
     ]
 
-    # First call: allow tools
-    response = client.chat.completions.create(
-        model=MODEL_NAME,
-        messages=messages,
-        tools=NEXUS_TOOLS,
-        tool_choice="auto",
-        max_tokens=800,
-    )
+    # 3. First call: allow tools
+    try:
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=messages,
+            tools=NEXUS_TOOLS,
+            tool_choice="auto",
+            max_tokens=800,
+        )
+    except Exception as e:
+        # Return readable error instead of crashing
+        return f"Error talking to Nexus backend: {e}"
 
-    message = response.choices[0].message
+    choice = response.choices[0]
+    message = choice.message
+
+    # Groq may or may not include tool_calls attribute
     tool_calls = getattr(message, "tool_calls", None)
 
-    # If no tools requested, return the text directly
+    # 4. No tools used: just return text
     if not tool_calls:
         return message.content or ""
 
-    # Execute each tool call
-    messages.append({
-        "role": "assistant",
-        "tool_calls": [tc.to_dict() for tc in tool_calls],
-        "content": message.content or "",
-    })
+    # 5. There are tool calls; append assistant message with tool_calls
+    messages.append(
+        {
+            "role": "assistant",
+            "content": message.content or "",
+            "tool_calls": [tc.to_dict() for tc in tool_calls],
+        }
+    )
 
+    # 6. Execute each tool call
     for tool_call in tool_calls:
         name = tool_call.function.name
 
@@ -189,12 +203,15 @@ def run_nexus_agent(user_message: str) -> str:
             }
         )
 
-    # Second call: let the model summarize after tools executed
-    final = client.chat.completions.create(
-        model=MODEL_NAME,
-        messages=messages,
-        max_tokens=800,
-    )
+    # 7. Second call: summarize after tools
+    try:
+        final = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=messages,
+            max_tokens=800,
+        )
+    except Exception as e:
+        return f"Error during final Nexus response: {e}"
 
     return final.choices[0].message.content or ""
 
@@ -220,7 +237,11 @@ async def chat(req: ChatRequest) -> ChatResponse:
     if not req.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
-    reply = run_nexus_agent(req.message.strip())
+    try:
+        reply = run_nexus_agent(req.message.strip())
+    except Exception as e:
+        reply = f"Unexpected error in Nexus Agent: {e}"
+
     files = list_workspace_files()
     return ChatResponse(reply=reply, files=files)
 
